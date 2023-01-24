@@ -14,6 +14,11 @@ const postsRouter= require('./routes/post');
 
 app.use('/posts', postsRouter);
 
+
+
+const messagesRouter= require('./routes/message');
+
+app.use('/messages', messagesRouter);
 // //middlewares
 // app.use('/posts', postsRouter(req,res) =>{
 //     console.log('this is middleware running')

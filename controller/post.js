@@ -98,4 +98,16 @@ exports.getOne=async(req,res) =>{
     }
  }
 
- 
+ exports.UpdateOnePost= async(req,res) =>{
+    try{
+     const updatedPost= await Post.findById({_id: req.params.postId}).updateOne(
+        {$set:{title: req.body.title}},
+        {$set:{description: req.body.description}}
+        );
+
+        res.json(updatedPost);
+    }catch(err){
+     res.json({message: err});
+    }
+ }
+
