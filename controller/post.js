@@ -1,5 +1,7 @@
 const Post= require('../models/post')
- const allPost= async(req,res) =>{
+
+//get all post
+ exports.allPost= async(req,res) =>{
     try{
      const posts= await Post.find();
      res.json(posts)
@@ -8,4 +10,41 @@ const Post= require('../models/post')
     }
  }
 
- module.exports= allPost
+ 
+
+// add a post
+ exports.addPost = async(req,res) =>{
+    const post= new Post({
+        title:req.body.title,
+        description:req.body.description
+    });
+    try{
+        const savedPost = await post.save();
+     res.json(savedPost)
+
+    }catch(err){
+        res.json({message: err});
+
+    }
+    
+}
+
+exports.getOne=async(req,res) =>{
+    try{
+     const post= await Post.findById(req.params.postId);
+     res.json(post);
+    }catch(err){
+     res.json({message: err});
+    }
+ }
+
+ exports.deleteOnePost=async(req,res) =>{
+    try{
+     const removedPost= await Post.remove({_id: req.params.postId});
+
+     res.json(removedPost);
+    }catch(err){
+     res.json({message: err});
+    }
+ }
+

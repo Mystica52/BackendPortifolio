@@ -1,48 +1,20 @@
 const express= require('express');
 const router= express.Router();
 const Post= require('../models/post');
-const allPost=require('../controller/post');
+const Post_controller=require('../controller/post');
+
 
 //get all post
-router.get('/', allPost);
+router.get('/',Post_controller.allPost);
 
 //submit a post
-router.post('/',async(req,res) =>{
-    const post= new Post({
-        title:req.body.title,
-        description:req.body.description
-    });
-    try{
-        const savedPost = await post.save();
-     res.json(savedPost)
-
-    }catch(err){
-        res.json({message: err});
-
-    }
-    
-});
+router.post('/',Post_controller.addPost);
 
 //get one by id or specific post
-router.get('/:postId', async(req,res) =>{
-    try{
-     const post= await Post.findById(req.params.postId);
-     res.json(post);
-    }catch(err){
-     res.json({message: err});
-    }
- });
+router.get('/:postId', Post_controller.getOne);
 
  //delete
- router.delete('/:postId',async(req,res) =>{
-    try{
-     const removedPost= await Post.remove({_id: req.params.postId});
-
-     res.json(removedPost);
-    }catch(err){
-     res.json({message: err});
-    }
- });
+ router.delete('/:postId', Post_controller.deleteOnePost);
 
  //update a post
  router.patch('/:postId',async(req,res) =>{
