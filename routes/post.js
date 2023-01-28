@@ -4,6 +4,7 @@ const Post= require('../models/post');
 const Post_controller=require('../controller/post');
 
 
+
 //get all post
 router.get('/',Post_controller.allPost);
 

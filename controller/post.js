@@ -1,8 +1,13 @@
-const Post= require('../models/post')
+const Post= require('../models/post');
+const fs=require('fs')
+// const imageUpload=require(express-fileupload)
+
 
 //get all post
  exports.allPost= async(req,res) =>{
     try{
+      uploadImage(req.body.image)
+      .then((url)=> res.send(url))
      const posts= await Post.find();
      res.json(posts)
     }catch{
@@ -12,21 +17,66 @@ const Post= require('../models/post')
 
  
 
+ const cloudinary = require('cloudinary').v2;
+
+
+// Configuration 
+cloudinary.config({
+  cloud_name: "dddf3qeth",
+  api_key: "243272584187889",
+  api_secret: "_ehqj1X0MffE-Dsb4NAnOW-hkEk"
+});
+
+
+
+
+
+// Generate 
+const url = cloudinary.url("olympic_flag", {
+  width: 100,
+  height: 150,
+  Crop: 'fill'
+});
+
+
+
+// The output url
+console.log(url);
+// https://res.cloudinary.com/<cloud_name>/image/upload/h_150,w_100/olympic_flag
+
+
 // add a post
  exports.addPost = async(req,res) =>{
-    const post= new Post({
-        title:req.body.title,
-        description:req.body.description
-    });
-    try{
-        const savedPost = await post.save();
-     res.json(savedPost)
+   // try{
+   //    const file= await fs.readFileSync('C:\Users\Hp\Pictures\Challenge_school.jpg');
+   //    console.log(file);
+   //    cloudinary.uploader.upload_stream({ resource_type: 'auto'}, function(error,result){
+   //       console.log(result)
+   //    }).end(file)
+      
+   // } 
+   // catch(error){
+   //    console.log(error)
+   // }
+   // Upload
 
-    }catch(err){
-        res.json({message: err});
+ const response = cloudinary.uploader.upload('https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg', {public_id: "olympic_flag"})
 
-    }
+response.then((data) => {
+  console.log(data);
+  console.log(data.secure_url);
+  const post= new Post({
+   title:req.body.title,
+    description:req.body.description,
+    image:data.secure_url
+
     
+});
+const savedPost = post.save();
+     res.json(savedPost)
+}).catch((err) => {
+   res.json({message: err});
+});
 }
 
 exports.getOne=async(req,res) =>{
@@ -48,3 +98,4 @@ exports.getOne=async(req,res) =>{
     }
  }
 
+ 

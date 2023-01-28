@@ -4,7 +4,7 @@ const app= express();
 const mongoose= require('mongoose');
 const bodyParser= require('body-parser');
 require('dotenv/config');
-
+// const imageUpload=require(express-fileupload)
 
 app.use(bodyParser.json());
 

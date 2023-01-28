@@ -1,6 +1,10 @@
+const fileUpload = require('express-fileupload');
 const mongoose = require('mongoose');
+// const uploadImage = require('../uploadImage');
+
 
 const postSchema= mongoose.Schema({
+
     title: {
         type:String,
         required:true
@@ -9,6 +13,10 @@ const postSchema= mongoose.Schema({
         type:String,
         required:true
     },
+     image:{
+        type:String,
+        required:false,
+     },
     date:{
         type:Date,
         default:Date.now
