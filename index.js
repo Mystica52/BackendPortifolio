@@ -5,13 +5,13 @@ const mongoose= require('mongoose');
 const bodyParser= require('body-parser');
 
 require('dotenv/config');
-const swaggerUi= require('swagger-ui-express')
+const swaggerUI= require('swagger-ui-express')
 const swaggerSpec = require('./documentation')
 
 require('dotenv/config');
 // const imageUpload=require(express-fileupload)
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec))
 
 
 app.use(bodyParser.json());

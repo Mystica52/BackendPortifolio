@@ -9,19 +9,19 @@ const Post_controller=require('../controller/post');
 
 
 //get all post
-router.get('/',Post_controller.allPost);
+router.get('/blogs',Post_controller.allPost);
 
 //submit a post
-router.post('/',Post_controller.addPost);
+router.post('/createBlog',Post_controller.addPost);
 
 //get one by id or specific post
 router.get('/:postId', Post_controller.getOne);
 
  //delete
- router.delete('/:postId', Post_controller.deleteOnePost);
+ router.delete('/delete/:postId', Post_controller.deleteOnePost);
 
  //update a post
- router.patch('/:postId',Post_controller.UpdateOnePost);
+ router.patch('/update/:postId',Post_controller.UpdateOnePost);
  
 
 module.exports = router;

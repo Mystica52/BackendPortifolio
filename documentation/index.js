@@ -17,7 +17,16 @@ const options = {
         }
     ]
    },
-   apis:['BACKENDPORTIFOLIO/**/*.doc.js']
+   components: {
+    securitySchemes:{
+        BearerToken:{
+            type: "http",
+            scheme: "bearer",
+            bearerFormat: "JWT",
+        }
+    }
+   },
+   apis:['documentation/**/*.doc.js']
 }
  const swaggerSpec=swaggerJSDoc(options)
  module.exports= swaggerSpec
