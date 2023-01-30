@@ -5,11 +5,28 @@ const mongoose= require('mongoose');
 const bodyParser= require('body-parser');
 
 require('dotenv/config');
+const swaggerUi= require('swagger-ui-express')
 
 require('dotenv/config');
 // const imageUpload=require(express-fileupload)
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 app.use(bodyParser.json());
+
+/**
+ * @swagger
+ * /posts:
+ *  get:
+ *   
+ *      summary: this api  is used to get all blogs
+ *      description: this api is used to fetch all data from file of blogs in mongodb
+ *      responses:
+ *          200:
+ *              description: this api is used to fetch all data from file of blogs in mongodb
+ *              content:
+ *                    application/json
+ */
+
 
 // import routes
 
@@ -28,6 +45,17 @@ app.use('/messages', messagesRouter);
 // });
 
 //rootes
+
+/**
+ * @swagger
+ * /:
+ *  get:
+ *      summary: this api  is used to check if get method is working or not
+ *      description: this api is used to check if get method is working or not
+ *      responses:
+ *          200:
+ *              description: To test Get method
+ */
 app.get('/', (req,res) =>{
     res.send('welcome to my portfolio')
 });
