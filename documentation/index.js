@@ -17,7 +17,7 @@ const options = {
         }
     ]
    },
-   apis:['', './routes/post']
+   apis:['BACKENDPORTIFOLIO/**/*.doc.js']
 }
  const swaggerSpec=swaggerJSDoc(options)
- export default swaggerSpec
+ module.exports= swaggerSpec
