@@ -13,11 +13,11 @@
  *                      schema:
  *                          type: object
  *                          properties:
- *                              title:
+ *                              name:
  *                                  type: string
- *                              description:
+ *                              address:
  *                                  type: string
- *                              image:
+ *                              message:
  *                                  type: string
  * 
  *          responses:
