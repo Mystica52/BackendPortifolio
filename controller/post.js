@@ -3,6 +3,7 @@ const fs=require('fs')
 // const imageUpload=require(express-fileupload)
 
 
+
 //get all post
  exports.allPost= async(req,res) =>{
     try{
