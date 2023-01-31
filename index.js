@@ -3,6 +3,7 @@ const express= require('express');
 const app= express();
 const mongoose= require('mongoose');
 const bodyParser= require('body-parser');
+
 require('dotenv/config');
 // const imageUpload=require(express-fileupload)
 
@@ -14,6 +15,16 @@ const postsRouter= require('./routes/post');
 
 app.use('/posts', postsRouter);
 
+
+
+const messagesRouter= require('./routes/message');
+
+app.use('/messages', messagesRouter);
+
+
+const userRouter= require('./routes/auth');
+
+app.use('/auth', userRouter);
 // //middlewares
 // app.use('/posts', postsRouter(req,res) =>{
 //     console.log('this is middleware running')
