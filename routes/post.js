@@ -9,27 +9,16 @@ const Post_controller=require('../controller/post');
 router.get('/',Post_controller.allPost);
 
 //submit a post
-router.post('/',Post_controller.addPost);
+router.post('/createBlog',Post_controller.addPost);
 
 //get one by id or specific post
 router.get('/:postId', Post_controller.getOne);
 
  //delete
- router.delete('/:postId', Post_controller.deleteOnePost);
+ router.delete('/delete/:postId', Post_controller.deleteOnePost);
 
  //update a post
- router.patch('/:postId',async(req,res) =>{
-    try{
-     const updatedPost= await Post.updateOne(
-        {_id: req.params.postId}, 
-        {$set:{title: req.body.title}}
-        );
-
-        res.json(updatedPost);
-    }catch(err){
-     res.json({message: err});
-    }
- });
+ router.patch('/update/:postId', Post_controller.updateOnePost);
  
 
 module.exports = router;
