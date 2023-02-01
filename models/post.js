@@ -1,6 +1,6 @@
-const fileUpload = require('express-fileupload');
+
 const mongoose = require('mongoose');
-// const uploadImage = require('../uploadImage');
+
 
 
 const postSchema= mongoose.Schema({

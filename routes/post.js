@@ -2,6 +2,7 @@ const express= require('express');
 const router= express.Router();
 const Post= require('../models/post');
 const Post_controller=require('../controller/post');
+const authenticate =require('../middlewares/authenticate')
 
 
 
@@ -15,10 +16,10 @@ router.post('/',Post_controller.addPost);
 router.get('/:postId', Post_controller.getOne);
 
  //delete
- router.delete('/:postId', Post_controller.deleteOnePost);
+ router.delete('/delete/:postId',Post_controller.deleteOnePost);
 
  //update a post
- router.patch('/:postId',Post_controller.UpdateOnePost);
+ router.patch('/update/:postId',Post_controller.UpdateOnePost);
  
 
 module.exports = router;

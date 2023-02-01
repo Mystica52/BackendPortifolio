@@ -6,11 +6,10 @@ const fs=require('fs')
 //get all post
  exports.allPost= async(req,res) =>{
     try{
-      uploadImage(req.body.image)
-      .then((url)=> res.send(url))
+      
      const posts= await Post.find();
      res.json(posts)
-    }catch{
+    }catch(err){
      res.json({message: err});
     }
  }
