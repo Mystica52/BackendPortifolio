@@ -33,6 +33,10 @@ app.use(bodyParser.json());
 
 // import routes
 
+const userRouter= require('./routes/auth');
+
+app.use('/auth', userRouter);
+
 const postsRouter= require('./routes/post');
 
 app.use('/posts', postsRouter);
