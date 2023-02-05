@@ -4,9 +4,9 @@ const {validationResult}= require('express-validator')
  exports.allMessage= async(req,res) =>{
     try{
      const messages= await Message.find();
-     res.json(messages)
-    }catch{
-     res.json({message: err});
+     res.status(200).json(messages)
+    }catch(err){
+     res.status(500).json({message: err});
     }
  }
 
@@ -22,15 +22,15 @@ const {validationResult}= require('express-validator')
 
     const error=validationResult(req);
     if(!error.isEmpty){
-      res.json(error.array())
+      res.status(500).json(error.array())
     }
     else{
       try{
          const savedMessage = await message.save();
-      res.json(savedMessage)
+      res.status(200).json(savedMessage)
  
      }catch(err){
-         res.json({message: err});
+         res.status(500).json({message: err});
  
      }
     }
@@ -41,9 +41,9 @@ const {validationResult}= require('express-validator')
 exports.getOneMessage=async(req,res) =>{
     try{
      const message= await Message.findById(req.params.messageId);
-     res.json(message);
+     res.status(200).json(message);
     }catch(err){
-     res.json({message: err});
+     res.status(500).json({message: err});
     }
  }
 
@@ -51,9 +51,9 @@ exports.getOneMessage=async(req,res) =>{
     try{
      const removedMessage= await Message.remove({_id: req.params.messageId});
 
-     res.json(removedMessage);
+     res.status(200).json(removedMessage);
     }catch(err){
-     res.json({message: err});
+     res.status(500).json({message: err});
     }
  }
 
@@ -67,9 +67,9 @@ exports.getOneMessage=async(req,res) =>{
         
         );
 
-        res.json(updatedMessage);
+        res.status(200).json(updatedMessage);
     }catch(err){
-     res.json({message: err});
+     res.status(500).json({message: err});
     }
  }
 
