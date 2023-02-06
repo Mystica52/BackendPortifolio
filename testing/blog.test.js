@@ -3,7 +3,6 @@ const mongoose  = require('mongoose')
 require('dotenv/config');
 
 const app = require('../app');
-const { response } = require('../app');
 const { expect } = require('parser');
 const { addPost } = require('../controller/post');
 

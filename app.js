@@ -7,10 +7,12 @@ const bodyParser= require('body-parser');
 require('dotenv/config');
 const swaggerUI= require('swagger-ui-express')
 const swaggerSpec = require('./documentation')
+const morgan= require('morgan');
+const cors = require('cors')
 
 
-
-
+app.use(morgan('dev'));
+app.use(cors())
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec))
 
 

@@ -28,12 +28,16 @@
     "http-errors": "^2.0.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.4",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.20",
     "parser": "^0.1.4",
     "swagger": "^0.7.5",
     "swagger-jsdoc": "^6.0.0",
     "swagger-ui-express": "^4.6.0",
     "ts-jest": "^29.0.5"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "devDependencies": {
     "jest": "^29.4.1",
