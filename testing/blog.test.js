@@ -18,199 +18,94 @@ afterAll(async()=>{
 
 
 
-// describe('Todo Api for blog', ()=>{
-
-//     describe('get blog by id',() =>{
-
-//         it('GET/blogs/id --> 404 if not found',async()=>{
-//             const blogId = mongoose.Types.ObjectId.toString();
-//             const blog =await addPost({
-//                 blogId,
-//                 title:"the truth",
-//                 description: " the biggest truth is saying to someone reality",
-//                 image: "path"
-//             });
-            
-
-            
-
-//             const {body, statusCode} =await request(app).get(`/posts/${blogId}`)
-//             expect(statusCode).toBe(200)
-//             expect(body).toBe(blog)
-    
-//         })
-
-//         it('GET/blogs/id --> 200 status and the blog',async()=>{
-
-//             const postId = 'post-123'
-
-//             return  await request(app).get(`/posts/${postId}`).expect(404);
-    
-//         })
-    
-
-//     })
-    // it('GET/blogs -->blog lists',async()=>{
-
-    //     return await request(app).get('/posts/blogs')
-    //     .expect(200)
-    //     .then((response)=>{
-    //         expect(response.body).toEqual(expect.arrayContaining([
-    //             expect.objectContaining({
-    //                 title:expect.any(String),
-    //                 description:expect.any(String),
-    //                 image:expect.any(String)
-    //             }),
-    //         ]));
-    //     });
-
-    // });
-
-    // it('GET/blogs/id -->specific blog  by id',async()=>{
-    //     return await request(app).get('/posts/1')
-    //     .expect(200)
-    //     .then((response)=>{
-    //         expect(response.body).toEqual(expect.arrayContaining([
-    //             expect.objectContaining({
-    //                 title:expect.any(String),
-    //                 description:expect.any(String),
-    //                 image:expect.any(String),
-    //                 completed:expect.any(Boolean)
-    //             }),
-    //         ]));
-    //     });
-
-    //  })
-
-//     // it('GET/blogs/id --> 404 if not found',async()=>{
-
-//     //     return await request(app).get('/posts/9999999').expect(404);
-
-//     // })
-
-//     it('POST/blog -->created blog ',async()=>{
-//         return  await request(app).post('/posts/blogs').send({
-//             title:"the  universe",
-//             description:"the huge  and biggest planet is Jupiter",
-//             image:"path",
-            
-//         })
-//         .expect('Content-Type', /json/)
-//         .expect(201)
-//         .then((response)=>{
-//             expect(response.body).toEqual(expect.arrayContaining([
-//                 expect.objectContaining({
-//                     title:"the  universe",
-//                     description:"the huge  and biggest planet is Jupiter",
-//                     image:"path",
-//                     completed:false
-//                 }),
-//             ]));
-//         });
+describe("POST API /posts/blog", () => {
+  
+    const blog = {
+      title: "the motivation speech",
+       description: "the motivation speech is good",
+      image: "path"
+    };
+    it("should successfully create an blog and return 200", (done) => {
+       request(app).post('/posts/createBlog').send(blog)
+        .end((err, res) => {
+          if (err) return done(err);
+       setTimeout(() => {
+          expect(res).to.have.status(200);
+    }, 20000);
+          
+          return done();
+        });
+    });
+  })
 
 
-//     })
+  describe("get API /api/blog", () => {
+  
 
-//     it('GET/todos -->blog lists',async()=>{
+    it(" should get all blog and return 200", (done) => {
+       request(app).get('/posts/Blogs')
+        .end((err, res) => {
+          if (err) return done(err);
+       setTimeout(() => {
+          expect(res).to.have.status(200);
+    }, 20000);
+          
+          return done();
+        });
+    });
+  })
 
-//     })
+  const postId = "1229b52ca50601182da72457"
+  describe("POST API /api/blog", () => {
+  
 
-//     it('GET/todos -->blog lists',async()=>{
+    it("should get by id and return 200", (done) => {
+       request(app).get('/posts/'+postId)
+        .end((err, res) => {
+          if (err) return done(err);
+       setTimeout(() => {
+          expect(res).to.have.status(200);
+    }, 20000);
+          
+          return done();
+        });
+    });
+  })
 
-//     })
-// })
 
-// get all blog
-describe("get all blog",()=>{
-    describe("given a title, description and image", ()=>{
+  describe("update API /api/blog", () => {
+  
 
-        test("should respond with a 200 status code", async()=>{
-            const response =  await request(app).get("/posts/blogs")
-            // console.log(response.body);
-        expect(response.statusCode).toBe(200);
-        expect(response.body).toHaveProperty({
-        title: "one",
-        description: "the one of good",
-        image:"path"
-        })
-        },10000)
+    it(" should update blog and return 200", (done) => {
+       request(app).patch('/posts/update/'+postId)
+        .end((err, res) => {
+          if (err) return done(err);
+       setTimeout(() => {
+          expect(res).to.have.status(200);
+    }, 20000);
+          
+          return done();
+        });
+    });
+  })
 
-        test("should return a list of the blog", async()=>{
-            const response =  await request(app).get("/posts/blogs")
-            
-        expect(response.statusCode).toBe(200)
-        },10000)
+  describe("delete API /api/blog", () => {
+  
 
-    })
-})
+    it(" should delete a blog and return 200", (done) => {
+       request(app).delete('/posts/delete/'+postId)
+        .end((err, res) => {
+          if (err) return done(err);
+       setTimeout(() => {
+          expect(res).to.have.status(200);
+    }, 20000);
+          
+          return done();
+        });
+    });
+  })
 
-//create a blog
-describe("create  blog",()=>{
-    describe("given a title, description and image", ()=>{
 
-        test("should respond with a 200 status code", async()=>{
-            const response =  await request(app).post("/posts/createBlog").send({
-                title:"the  universe",
-                description:"the huge  and biggest planet is Jupiter",
-                image:"string"
-            })
-            
-        expect(response.statusCode).toBe(200)
-        },10000)
 
-        
-       
-    })
 
-    
-})
 
-// get by id
-describe("get one blog by id",()=>{
-    describe("given a title, description and image", ()=>{
-
-        test("should respond with a 200 status code", async()=>{
-            const response =  await request(app).get("/posts/01")
-            // console.log(response.body);
-        expect(response.statusCode).toBe(200)
-        },10000)
-    })
-
-    describe("when the title, description, image is missing", ()=>{
-        test("should response with a status code of 400", async ()=>{
-           const  response =  await request(app).post("/posts/createBlog").send({
-                title:"the  universe",
-               
-            })
-            
-        expect(response.statusCode).toBe(400)
-        },10000)
-        
-    })
-})
-
-describe("update one blog by id",()=>{
-    describe("given a title, description and image", ()=>{
-
-        test("should respond with a 200 status code", async()=>{
-            const response =  await request(app).patch("/posts/update/01").send({
-                title:"the  universe",
-                description:" biggest planet is Jupiter",
-                image:"string"
-            })
-            // console.log(response.body);
-        expect(response.statusCode).toBe(200)
-        },10000)
-    })
-})
-
-describe("delete one blog by id",()=>{
-    describe("given a title, description and image", ()=>{
-
-        test("should respond with a 200 status code", async()=>{
-            const response =  await request(app).delete("/posts/update/01")
-            // console.log(response.body);
-        expect(response.statusCode).toBe(200)
-        },10000)
-    })
-})

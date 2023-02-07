@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70.96% </span>
+                <span class="strong">80.64% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>22/31</span>
+                <span class='fraction'>25/31</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70.96% </span>
+                <span class="strong">80.64% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>22/31</span>
+                <span class='fraction'>25/31</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -181,17 +181,7 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -201,15 +191,25 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -256,17 +256,17 @@ const {validationResult}= require('express-validator')
 exports.getOneMessage=async(req,res) =&gt;{
     try{
      const message= await Message.findById(req.params.messageId);
-<span class="cstat-no" title="statement not covered" >     res.status(200).json(message);</span>
+     res.status(200).json(message);
     }catch(err){
-     res.status(500).json({message: err});
+<span class="cstat-no" title="statement not covered" >     res.status(500).json({message: err});</span>
     }
  }
 &nbsp;
- exports.deleteOneMessage=<span class="fstat-no" title="function not covered" >as</span>ync(req,res) =&gt;{
-<span class="cstat-no" title="statement not covered" >    try{</span>
-     const removedMessage= <span class="cstat-no" title="statement not covered" >await Message.remove({_id: req.params.messageId});</span>
+ exports.deleteOneMessage=async(req,res) =&gt;{
+    try{
+     const removedMessage= await Message.remove({_id: req.params.messageId});
 &nbsp;
-<span class="cstat-no" title="statement not covered" >     res.status(200).json(removedMessage);</span>
+     res.status(200).json(removedMessage);
     }catch(err){
 <span class="cstat-no" title="statement not covered" >     res.status(500).json({message: err});</span>
     }
@@ -282,9 +282,9 @@ exports.getOneMessage=async(req,res) =&gt;{
         
         );
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        res.status(200).json(updatedMessage);</span>
+        res.status(200).json(updatedMessage);
     }catch(err){
-     res.status(500).json({message: err});
+<span class="cstat-no" title="statement not covered" >     res.status(500).json({message: err});</span>
     }
  }
 &nbsp;
@@ -295,7 +295,7 @@ exports.getOneMessage=async(req,res) =&gt;{
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-02-05T20:34:41.767Z
+                at 2023-02-07T20:54:20.346Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

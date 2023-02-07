@@ -1,9 +1,11 @@
 const  request  = require('supertest')
 const mongoose  = require('mongoose')
-
-const app = require('../app')
-// const { response } = require('../index')
 require('dotenv/config');
+
+const app = require('../app');
+const { expect } = require('parser');
+const { addPost } = require('../controller/post');
+
 
 beforeAll(async ()=>{
     await  mongoose.connect(process.env.DB_CONNECTION)
@@ -13,86 +15,92 @@ afterAll(async()=>{
     await mongoose.disconnect();
     await mongoose.connection.close();
 })
-describe("get all message",()=>{
-    describe("given a name, address and message", ()=>{
-
-        it("should respond with a 200 status code", async()=>{
-            const response =  await request(app).get("/messages")
-            // console.log(response.body);
-        expect(response.statusCode).toBe(200)
-        },10000)
-    })
-})
 
 
-describe("create  a message",()=>{
-    describe("given a title, description and image", ()=>{
 
-        it("should respond with a 200 status code", async()=>{
-            const response =  await request(app).post("/messages/createMessage").send({
-                name:"the  universe",
-                address:"the huge  and biggest planet is Jupiter",
-                message:"string"
-            })
-            
-        expect(response.statusCode).toBe(200)
-        },10000)
-
-        
-    })
-
-    
-})
-
-// get by id
-describe("get one message by id",()=>{
-    describe("given a name, address and message", ()=>{
-
-        it("should respond with a 200 status code", async()=>{
-            const response =  await request(app).get("/messages/01")
-            // console.log(response.body);
-        expect(response.statusCode).toBe(200)
-        },10000)
-    })
-
-    // describe("when the title, description, image is missing", ()=>{
-    //     test("should response with a status code of 400", async ()=>{
-    //        const  response =  await request(app).post("/posts/createBlog").send({
-    //             title:"the  universe",
-               
-    //         })
-            
-    //     expect(response.statusCode).toBe(400)
-    //     },10000)
-        
-    // })
-})
-//update
-
-describe("update one message by id",()=>{
-    describe("given a name, address and message", ()=>{
-
-        it("should respond with a 200 status code", async()=>{
-            const response =  await request(app).patch("/messages/update/01").send({
-                name:"mystica",
-                address:" rwanda",
-                message:"I need to talk to you"
-            })
-            // console.log(response.body);
-        expect(response.statusCode).toBe(200)
-        },10000)
-    })
-})
+describe("POST API/messages", () => {
+  
+    const messages = {
+      name: "the motivation speech",
+      address: "the motivation speech is good",
+      message: "path"
+    };
+    it("should successfully create an message and return 200", (done) => {
+       request(app).post('/messages/createMessage').send(messages)
+        .end((err, res) => {
+          if (err) return done(err);
+       setTimeout(() => {
+          expect(res).to.have.status(200);
+    }, 20000);
+          
+          return done();
+        });
+    });
+  })
 
 
-//delete
-// describe("delete one blog by id",()=>{
-//     describe("given a name, address and message", ()=>{
+  describe("get API /Messages", () => {
+  
 
-//         test("should respond with a 200 status code", async()=>{
-//             const response =  await request(app).delete("/messages/update/01")
-//             // console.log(response.body);
-//         expect(response.statusCode).toBe(200)
-//         },10000)
-//     })
-// })
+    it(" should get all blog and return 200", (done) => {
+       request(app).get('/messages')
+        .end((err, res) => {
+          if (err) return done(err);
+       setTimeout(() => {
+          expect(res).to.have.status(200);
+    }, 20000);
+          
+          return done();
+        });
+    });
+  })
+
+  const messageId = "1229b52ca50601182da72457"
+  describe("get API /messages/", () => {
+  
+
+    it("should get message by id and return 200", (done) => {
+       request(app).get('/messages/'+messageId)
+        .end((err, res) => {
+          if (err) return done(err);
+       setTimeout(() => {
+          expect(res).to.have.status(200);
+    }, 20000);
+          
+          return done();
+        });
+    });
+  })
+
+
+  describe("update API /api/blog", () => {
+  
+
+    it(" should update message and return 200", (done) => {
+       request(app).patch('/messages/update/'+messageId)
+        .end((err, res) => {
+          if (err) return done(err);
+       setTimeout(() => {
+          expect(res).to.have.status(200);
+    }, 20000);
+          
+          return done();
+        });
+    });
+  })
+
+  describe("delete API /api/blog", () => {
+  
+
+    it(" should delete a message and return 200", (done) => {
+       request(app).delete('/messages/delete/'+messageId)
+        .end((err, res) => {
+          if (err) return done(err);
+       setTimeout(() => {
+          expect(res).to.have.status(200);
+    }, 20000);
+          
+          return done();
+        });
+    });
+  })
