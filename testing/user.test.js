@@ -64,7 +64,7 @@ afterAll(async()=>{
 
 let token = "";
 
-describe("POST API /api/user", () => {
+describe("POST API /auth", () => {
   
   const user = {
     name: "mystica",
@@ -102,7 +102,7 @@ describe("POST API /api/user", () => {
 })
   
 
-  describe("POST API /api/user", () => {
+  describe("POST API /messages", () => {
   
     const user = {
      
