@@ -42,7 +42,7 @@ describe("POST API/messages", () => {
   describe("get API /Messages", () => {
   
 
-    it(" should get all blog and return 200", (done) => {
+    it(" should get all message and return 200", (done) => {
        request(app).get('/messages')
         .end((err, res) => {
           if (err) return done(err);
@@ -73,7 +73,7 @@ describe("POST API/messages", () => {
   })
 
 
-  describe("update API /api/blog", () => {
+  describe("update API /messages", () => {
   
 
     it(" should update message and return 200", (done) => {
@@ -89,7 +89,7 @@ describe("POST API/messages", () => {
     });
   })
 
-  describe("delete API /api/blog", () => {
+  describe("delete API /messages", () => {
   
 
     it(" should delete a message and return 200", (done) => {
