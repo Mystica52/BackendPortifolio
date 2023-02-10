@@ -56,7 +56,7 @@
  *                      description: A message retrieved successfully
  * 
  * /messages/update/{id}:
- *      put:
+ *      patch:
  *              tags: [Message]
  *              summary: This request will update a message
  *              description: Update a message

@@ -1,5 +1,6 @@
 const Post = require("../models/post");
 const fs = require("fs");
+const { title } = require("process");
 
 
 //get all post
@@ -72,15 +73,46 @@ exports.deleteOnePost = async (req, res) => {
 
 exports.UpdateOnePost = async (req, res) => {
   try {
-    const updatedPost = await Post.findById({
-      _id: req.params.postId,
-    }).updateOne(
-      { $set: { title: req.body.title } },
-      { $set: { description: req.body.description } }
+    var id = req.params.postId;
+    const updatedBlog = await Post.findByIdAndUpdate(
+      { _id: id },
+      req.body,
+      {
+        new: true,
+      }
     );
-
-    res.json(updatedPost);
-  } catch (err) {
-    res.status(404).json({  err :" blog not found",status:"404"});
+    if (updatedBlog) {
+      return res.status(200).json({
+        message:"updated",
+        data: updatedBlog
+      })
+    } else {
+      return res.status(500).json({
+        message:" this is not updated"
+        
+      })
+    }
+  } catch (error) {
+    res.status(404).json({ status: "fail", message: error });
+    
   }
 };
+
+// exports.UpdateOnePost = async (req, res) => {
+  
+//   try {
+//     const updatedPost = await Post.findById({
+//       _id: req.params.postId,
+//     }).update(
+//       { $set: { title: req.body.title } },
+      
+//       { $set: { description: req.body.description } }
+//     );
+//     console.log("req",req.body.title)
+//     // console.log( "update",updatedPost)
+//     res.json(updatedPost);
+//     // console.log(res)
+//   } catch (err) {
+//     res.status(404).json({  err :" blog not found",status:"404"});
+//   }
+// };

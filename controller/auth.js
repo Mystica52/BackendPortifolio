@@ -12,7 +12,7 @@ const register = async(req, res) => {
     });
   }
 
-  const hashedPass = bcrypt.hashSync(req.body.password, 10);
+  const hashedPass = bcrypt.hashSync(req.body.password, 8);
  
 
   let user = new User({

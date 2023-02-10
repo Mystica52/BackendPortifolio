@@ -56,7 +56,7 @@
  *                      description: A blog retrieved successfully
  * 
  * /posts/update/{id}:
- *      put:
+ *      patch:
 *              tags: [Blog]
 *              summary: This request will update a blog
 *              description: Update a blog
@@ -76,9 +76,7 @@
 *                                      type: string
 *                                  description:
 *                                      type: string
-*                                  blogBody:
-*                                      type: string
-*                                  imageUrl:
+*                                  image:
 *                                      type: string
 *              
 *              responses:
