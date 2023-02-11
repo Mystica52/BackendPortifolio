@@ -13,7 +13,7 @@ const cors = require('cors')
 
 app.use(morgan('dev'));
 app.use(cors())
-app.use('/`             `', swaggerUI.serve, swaggerUI.setup(swaggerSpec))
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec))
 
 
 app.use(bodyParser.json());
