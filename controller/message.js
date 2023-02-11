@@ -27,7 +27,10 @@ const {validationResult}= require('express-validator')
     else{
       try{
          const savedMessage = await message.save();
-      res.status(200).json(savedMessage)
+      return res.status(200).json({
+         message: "message sent successfully",
+         savedMessage
+      })
  
      }catch(err){
          res.status(500).json({message: err});
