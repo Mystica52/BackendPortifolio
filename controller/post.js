@@ -13,42 +13,23 @@ exports.allPost = async (req, res) => {
   }
 };
 
-const cloudinary = require("cloudinary").v2;
 
-// Configuration
-cloudinary.config({
-  cloud_name: process.env.cloud_name,
-  api_key: process.env.api_key,
-  api_secret: process.env.api_secret,
-});
-
-// Generate
-const url = cloudinary.url("olympic_flag", {
-  width: 100,
-  height: 150,
-  Crop: "fill",
-});
 
 // add a post
 exports.addPost = async (req, res) => {
-  const response = cloudinary.uploader.upload(
-    "https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg",
-    { public_id: "olympic_flag" }
-  );
-
-  response
-    .then(async(data) => {
-      const post = new Post({
-        title: req.body.title,
-        description: req.body.description,
-        image: data.secure_url,
-      });
-      const savedPost = await post.save();
-      res.status(200).json(savedPost);
-    })
-    .catch((err) => {
-      res.status(500).json({err : err,status:"500"});
+  try {
+    const post = new Post({
+      title: req.body.title,
+      description: req.body.description,
+      image: res.body.image,
     });
+    const savedPost = await post.save();
+    res.status(200).json(savedPost);
+  } catch (error) {
+    res.status(500).json({err : error,status:"500"});
+  }
+
+
 };
 
 exports.getOne = async (req, res) => {
