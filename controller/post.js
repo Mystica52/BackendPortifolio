@@ -21,7 +21,7 @@ exports.addPost = async (req, res) => {
     const post = new Post({
       title: req.body.title,
       description: req.body.description,
-      image: res.body.image,
+      image: res.body,
     });
     const savedPost = await post.save();
     res.status(200).json(savedPost);
